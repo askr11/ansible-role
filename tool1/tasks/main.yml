@@ -13,7 +13,8 @@
     - name: Install build tools
       become: true
       apt:
-        name: 
+        update_cache: yes
+        #name: 
           #- libjemalloc-dev
           - liblua5.3-dev
           #- libhiredis-dev
