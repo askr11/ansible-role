@@ -1,5 +1,4 @@
     - name: copy pem key file
-      become: true
       copy:
         src: "/var/lib/jenkins/workspace/tool/keyins.pem"
         dest: "./keyins.pem"
