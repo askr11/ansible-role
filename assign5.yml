@@ -1,9 +1,4 @@
-- name: copy pem key file
-  hosts: localhost
-  become: true
-  file:
-    path: "/var/lib/jenkins/workspace/tool/keyins.pem"
-    mode: "0600"
+
 - name: task
   hosts: all
   become: yes
