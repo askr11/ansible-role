@@ -1,0 +1,47 @@
+    - name: copy pem key file
+      become: true
+      copy:
+        src: "/var/lib/jenkins/workspace/tool/keyins.pem"
+        dest: "/home/ubuntu/keyins.pem"
+        mode: '600'
+    
+    - name: Install build tools
+      become: true
+      apt:
+        name: 
+          - libjemalloc-dev
+          - liblua5.3-dev
+          - libhiredis-dev
+          - build-essential
+    - name: Download redis
+      get_url:
+        url: "http://download.redis.io/releases/{{ app.appname }}-{{ app.version }}.tar.gz"
+        dest: "/tmp/redis_install/redis.tar.gz"
+
+    - name: Ensure extracted directory exists
+      file:
+        path: "/tmp/redis_install/{{ app.appname }}-{{ app.version }}"
+        state: directory
+        recurse: yes
+    - name: Extract redis
+      unarchive:
+        src: "/tmp/redis_install/redis.tar.gz"
+        dest: "/tmp/redis_install"
+        remote_src: yes
+
+    - name: Build and install Redis
+      shell:
+        cmd: "make && make install"
+        chdir: "/tmp/redis_install/{{ app.appname }}-{{ app.version }}"
+      notify: restart
+    - name: Configure Redis
+      template:
+        src: "conf.j2"
+        dest: "/tmp/redis_install/{{ app.appname }}-{{ app.version }}/conf"
+      become: true
+    - name: remove temporary directory
+      file:
+        path: "/tmp/redis_install"
+        state: absent
+
+    

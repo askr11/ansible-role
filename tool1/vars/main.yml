@@ -1,0 +1,3 @@
+app:
+  appname: redis
+  version: 5.0.7
