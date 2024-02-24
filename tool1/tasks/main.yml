@@ -6,7 +6,7 @@
         mode: '600'
     
     - name: Scan SSH host keys
-      command: ssh-keyscan -t rsa,ecdsa,ed25519 /var/lib/jenkins/workspace/tool/inventory.yml
+      command: ssh-keyscan -t rsa,ecdsa,ed25519 {{ inventory_hostname }}
       register: ssh_keyscan_output
       
     - name: Add SSH host keys to known_hosts file
