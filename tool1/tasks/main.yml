@@ -19,6 +19,10 @@
           #- liblua5.3-dev
           #- libhiredis-dev
           #- build-essential
+    - name: Create directory for Redis installation
+      file:
+        path: "/tmp/redis_install"
+        state: directory
     - name: Download redis
       get_url:
         url: "http://download.redis.io/releases/{{ app.appname }}-{{ app.version }}.tar.gz"
