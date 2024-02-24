@@ -4,7 +4,8 @@
         path: "{{ ansible_env.HOME }}/.ssh/known_hosts"
         state: touch
         mode: '0600'
-    
+      delegate_to: localhost
+      
     - name: Scan SSH host keys
       command: ssh-keyscan {{ inventory_hostname }}
       register: ssh_keyscan_output
@@ -14,6 +15,7 @@
         path: "{{ lookup('env', 'HOME') + '/.ssh/known_hosts' }}"
         line: "{{ ssh_keyscan_output.stdout_lines }}"
         create: yes
+      delegate_to: localhost
 
     - name: Install build tools
       become: true
