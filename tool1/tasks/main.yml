@@ -15,10 +15,11 @@
       apt:
         update_cache: yes
     - name: install build
+        - build-essential
           #- libjemalloc-dev
           #- liblua5.3-dev
           #- libhiredis-dev
-        - build-essential
+        
     - name: Create directory for Redis installation
       file:
         path: "/tmp/redis_install"
