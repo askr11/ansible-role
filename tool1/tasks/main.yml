@@ -1,9 +1,9 @@
     - name: copy pem key file
       become: true
-      copy:
-        src: "/var/lib/jenkins/workspace/tool/keyins.pem"
-        dest: "/home/ubuntu/keyins.pem"
+      file:
+        path: "/var/lib/jenkins/workspace/tool/keyins.pem"
         mode: '0600'
+      delegate_to: localhost
       run_once: true
       
     #- name: Scan SSH host keys
