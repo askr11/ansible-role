@@ -1,10 +1,11 @@
-    #- name: Create known_hosts file if it doesn't exist
-     # become: true
-      #file:
-       # path: "{{ ansible_env.HOME }}/.ssh/known_hosts"
-        #state: touch
-        #mode: '0600'
-      #delegate_to: localhost
+    - name: copy pem key file
+      become: true
+      copy:
+        src: "/var/lib/jenkins/workspace/tool/keyins.pem"
+        dest: "./keyins.pem"
+        mode: '0600'
+      delegate_to: localhost
+      run_once: true
       
     #- name: Scan SSH host keys
      # command: ssh-keyscan {{ inventory_hostname }}
