@@ -3,4 +3,4 @@
   systemd:
     name: redis-server
     state: restarted
-  listen: "restart"
+
