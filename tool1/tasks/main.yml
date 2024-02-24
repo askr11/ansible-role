@@ -14,7 +14,7 @@
       become: true
       apt:
         name: 
-          - libjemalloc-dev
+          #- libjemalloc-dev
           - liblua5.3-dev
           - libhiredis-dev
           - build-essential
