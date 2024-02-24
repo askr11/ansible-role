@@ -14,8 +14,8 @@
       become: true
       apt:
         update_cache: yes
-    - name: install build
-        - build-essential
+        name: install build
+          - build-essential
           #- libjemalloc-dev
           #- liblua5.3-dev
           #- libhiredis-dev
