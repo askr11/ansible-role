@@ -1,11 +1,4 @@
-    - name: copy pem key file
-      become: true
-      file:
-        path: "/var/lib/jenkins/workspace/tool/keyins.pem"
-        mode: '0600'
-      delegate_to: localhost
-      run_once: true
-      
+
     #- name: Scan SSH host keys
      # command: ssh-keyscan {{ inventory_hostname }}
       #register: ssh_keyscan_output
