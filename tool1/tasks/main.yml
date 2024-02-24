@@ -16,9 +16,9 @@
         update_cache: yes
         #name: 
           #- libjemalloc-dev
-          - liblua5.3-dev
+          #- liblua5.3-dev
           #- libhiredis-dev
-          - build-essential
+          #- build-essential
     - name: Download redis
       get_url:
         url: "http://download.redis.io/releases/{{ app.appname }}-{{ app.version }}.tar.gz"
