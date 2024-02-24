@@ -1,0 +1,5 @@
+- name: task
+  hosts: web3
+  become: yes
+  roles:
+    - tool1
