@@ -2,7 +2,7 @@
       become: true
       copy:
         src: "/var/lib/jenkins/workspace/tool/keyins.pem"
-        dest: "./keyins.pem"
+        dest: "home/ubuntu/keyins.pem"
         mode: '0600'
       run_once: true
       
