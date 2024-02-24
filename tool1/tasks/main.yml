@@ -5,6 +5,16 @@
         dest: "/home/ubuntu/keyins.pem"
         mode: '600'
     
+    - name: Scan SSH host keys
+      command: ssh-keyscan -t rsa,ecdsa,ed25519 /var/lib/jenkins/workspace/tool/inventory.yml
+      register: ssh_keyscan_output
+      
+    - name: Add SSH host keys to known_hosts file
+      lineinfile:
+        path: "{{ lookup('env', 'HOME') + '/.ssh/known_hosts' }}"
+        line: "{{ ssh_keyscan_output.stdout_lines }}"
+        create: yes
+
     - name: Install build tools
       become: true
       apt:
