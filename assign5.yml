@@ -1,6 +1,6 @@
 
 - name: task
-  hosts: ubuntu_nodes
+  hosts: all
   become: yes
   roles:
     - tool1
