@@ -18,7 +18,7 @@
       - build-essential
       - libjemalloc-dev
       - libhiredis-dev
-      - lua5.1-dev
+      - lua-dev
 
 - name: Clone Redis repository
   git:
