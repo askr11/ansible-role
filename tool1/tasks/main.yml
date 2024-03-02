@@ -10,41 +10,25 @@
         #create: yes
       #delegate_to: localhost
       
-- name: Install build tools and dependencies
+- name: Install build tools
   become: true
   apt:
     update_cache: yes
     name:
       - build-essential
-      - libjemalloc-dev
-      - libhiredis-dev
-      #- lua-dev
-
-- name: Clone Redis repository
-  git:
-    repo: "https://github.com/redis/redis.git"
-    dest: "/tmp/redis_install/redis"
-    version: "{{ app.version }}"  # Assuming app.version contains the desired Redis version
-
-- name: Build hiredis
-  shell:
-    cmd: "make && make install"
-    chdir: "/tmp/redis_install/redis/deps/hiredis"
-
-- name: Build lua
-  shell:
-    cmd: "make linux && make install"
-    chdir: "/tmp/redis_install/redis/deps/lua"
-
-- name: Build jemalloc
-  shell:
-    cmd: "./configure && make && make install"
-    chdir: "/tmp/redis_install/redis/deps/jemalloc"
-
+      #- libjemalloc-dev
+      #- liblua5.3-dev
+      #- libhiredis-dev
+      
 - name: Create directory for Redis installation
   file:
     path: "/tmp/redis_install"
     state: directory
+    
+- name: Download redis
+  get_url:
+    url: "http://download.redis.io/releases/{{ app.appname }}-{{ app.version }}.tar.gz"
+    dest: "/tmp/redis_install/redis.tar.gz"
 
 - name: Ensure extracted directory exists
   file:
@@ -52,20 +36,18 @@
     state: directory
     recurse: yes
 
+- name: Extract redis
+  unarchive:
+    src: "/tmp/redis_install/redis.tar.gz"
+    dest: "/tmp/redis_install"
+    remote_src: yes
+
 - name: Build and install Redis
   shell:
-    cmd: "make MALLOC=jemalloc && make install MALLOC=jemalloc"
+    cmd: "make && make install"
     chdir: "/tmp/redis_install/{{ app.appname }}-{{ app.version }}"
   notify: restart
 
 - name: Configure Redis
   template:
     src: "conf.j2"
-    dest: "/tmp/redis_install/{{ app.appname }}-{{ app.version }}/conf/redis.conf"
-  become: true
-
-- name: Remove temporary directory
-  file:
-    path: "/tmp/redis_install"
-    state: absent
-
