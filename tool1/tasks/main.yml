@@ -16,8 +16,8 @@
     name:
       - build-essential
       - libjemalloc-dev
-      #- liblua5.3-dev
-      #- libhiredis-dev
+      - liblua5.3-dev
+      - libhiredis-dev
       
 - name: Create directory for Redis installation
   file:
