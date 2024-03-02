@@ -16,7 +16,7 @@
         update_cache: yes
         name:
           - build-essential
-          #- libjemalloc-dev
+          - libjemalloc-dev
           #- liblua5.3-dev
           #- libhiredis-dev
         
