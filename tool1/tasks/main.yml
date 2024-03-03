@@ -44,8 +44,6 @@
   file:
     path: /etc/redis/redis.conf
     state: touch
-    owner: redis
-    group: redis
     mode: 0644
 - name: Ensure log configuration file exists
   file:
@@ -63,8 +61,8 @@
   template:
     src: conf.j2
     dest: /etc/redis/redis.conf
-    owner: root
-    group: root
+    owner: redis
+    group: redis
     mode: 0644 
 
 - name: Configure Redis
