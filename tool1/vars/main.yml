@@ -9,7 +9,6 @@ redis_timeout: 300
 redis_databases: 1
 redis_requirepass_loglevel: "notice"
 redis_logfile: /var/log/redis/redis-server.log
-
 redis_timeout: 0
 redis_databases: 16
 redis_maxmemory: 0
