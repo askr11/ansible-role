@@ -2,3 +2,10 @@ app_name: "redis"
 app_version: "6.2.6"
 app_package_url: "http://download.redis.io/releases/redis-{{ app_version }}.tar.gz"
 redis_package_url: "{{ app_package_url }}"
+redis_package_name: "redis-server"
+redis_port: 6379
+redis_bind_interface: 127.0.0.1
+redis_timeout: 300
+redis_databases: 1
+redis_requirepass_loglevel: "notice"
+redis_logfile: /var/log/redis/redis-server.log
