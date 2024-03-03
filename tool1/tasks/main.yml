@@ -38,6 +38,8 @@
   file:
     path: /etc/redis/redis.conf
     state: touch
+    recurse: yes
+    become: yes
     mode: 0644
 
 - name: Configure Redis
