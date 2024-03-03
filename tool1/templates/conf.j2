@@ -11,7 +11,7 @@ rdbcompression yes
 dbfilename dump.rdb
 dir /var/lib/redis
 maxmemory {{ redis_maxmemory }}
-maxmemory_policy {{ redis_maxmemory_policy }}
+#maxmemory_policy {{ redis_maxmemory_policy }}
 requirepass {{ redis_requirepass }}
 logfile {{ redis_logfile }}
 loglevel {{ redis_requirepass_loglevel }}
