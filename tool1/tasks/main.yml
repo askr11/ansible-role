@@ -61,8 +61,6 @@
   template:
     src: conf.j2
     dest: /etc/redis/redis.conf
-    owner: redis
-    group: redis
     mode: 0644 
 
 - name: Configure Redis
