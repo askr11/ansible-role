@@ -44,6 +44,8 @@
   file:
     path: /etc/redis/redis.conf
     state: touch
+    owner: redis
+    group: redis
     mode: 0644
 - name: Ensure log configuration file exists
   file:
