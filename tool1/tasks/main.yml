@@ -70,7 +70,7 @@
     line: 'port 6380'
 
 - name: Start Redis service
-  command: systemctl start {{ app_name }}
+  command: sudo systemctl start {{ app_name }}
 
 - name: Enable Redis service to start on boot
-  command: systemctl enable {{ app_name }}
+  command: sudo systemctl enable {{ app_name }}
