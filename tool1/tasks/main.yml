@@ -36,11 +36,15 @@
   
 - name: Ensure Redis configuration file exists
   file:
-    path: /etc/redis/redis.conf
-    state: touch
+    path: /etc/redis
+    state: directory
     recurse: yes
     mode: 0644
-
+- name: Ensure Redis configuration file exists
+  file:
+    path: /etc/redis/redis.conf
+    state: touch
+    mode: 0644
 - name: Configure Redis
   template:
     src: redis.conf.j2
