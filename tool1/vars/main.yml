@@ -12,5 +12,5 @@ redis_logfile: /var/log/redis/redis-server.log
 redis_timeout: 0
 redis_databases: 16
 redis_maxmemory: 0
-redis_maxmemory_policy: allkeys-lru
+#redis_maxmemory_policy: allkeys-lru
 redis_requirepass: mypassword
