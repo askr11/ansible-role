@@ -10,44 +10,32 @@
         #create: yes
       #delegate_to: localhost
       
-- name: Install build tools
-  become: true
-  apt:
-    update_cache: yes
-    name:
-      - build-essential
-      - libjemalloc-dev
-      - liblua5.3-dev
-      - libhiredis-dev
-      
-- name: Create directory for Redis installation
-  file:
-    path: "/tmp/redis_install"
-    state: directory
-    
-- name: Download redis
+---
+- name: Download Redis package
   get_url:
-    url: "http://download.redis.io/releases/{{ app.appname }}-{{ app.version }}.tar.gz"
-    dest: "/tmp/redis_install/redis.tar.gz"
+    url: "{{ app_package_url }}"
+    dest: "/tmp/{{ app_name }}.tar.gz"
+    validate_certs: no
 
-- name: Ensure extracted directory exists
-  file:
-    path: "/tmp/redis_install/{{ app.appname }}-{{ app.version }}"
-    state: directory
-    recurse: yes
+- name: Extract Redis package
+  command: tar -xzvf /tmp/{{ app_name }}.tar.gz -C /usr/local/src/
 
-- name: Extract redis
-  unarchive:
-    src: "/tmp/redis_install/redis.tar.gz"
-    dest: "/tmp/redis_install"
-    remote_src: yes
+- name: Install Redis dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - build-essential
+    - tcl
 
-- name: Build and install Redis
-  shell:
-    cmd: "make && make install"
-    chdir: "/tmp/redis_install/{{ app.appname }}-{{ app.version }}"
-  notify: restart
+- name: Build Redis from source
+  command: make -C /usr/local/src/{{ app_name }}-{{ app_version }}
 
-- name: Configure Redis
-  template:
-    src: "conf.j2"
+- name: Install Redis
+  command: make -C /usr/local/src/{{ app_name }}-{{ app_version }} install
+
+- name: Start Redis service
+  command: systemctl start {{ app_name }}.service
+
+- name: Enable Redis service to start on boot
+  command: systemctl enable {{ app_name }}.service
