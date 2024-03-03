@@ -35,7 +35,7 @@
   command: make -C /usr/local/src/{{ app_name }}-{{ app_version }} install
 
 - name: Start Redis service
-  command: systemctl start {{ app_name }}.service
+  command: systemctl start {{ app_name }}
 
 - name: Enable Redis service to start on boot
-  command: systemctl enable {{ app_name }}.service
+  command: systemctl enable {{ app_name }}
