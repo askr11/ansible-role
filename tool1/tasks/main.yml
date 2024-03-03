@@ -45,6 +45,18 @@
     path: /etc/redis/redis.conf
     state: touch
     mode: 0644
+- name: Ensure log configuration file exists
+  file:
+    path: /var/log/redis
+    state: directory
+    recurse: yes
+    mode: 0644
+- name: Ensure Redis configuration file exists
+  file:
+    path: /var/log/redis/redis-server.log
+    state: touch
+    mode: 0644
+    
 - name: Configure Redis
   template:
     src: conf.j2
