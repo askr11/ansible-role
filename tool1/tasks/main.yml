@@ -60,7 +60,7 @@
     line: 'port 6380'
 
 - name: Start Redis service
-  command: systemctl start {{ app_name }}-server
+  command: systemctl start {{ app_name }}
 
 - name: Enable Redis service to start on boot
-  command: systemctl enable {{ app_name }}-server
+  command: systemctl enable {{ app_name }}
